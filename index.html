@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Git Yami</title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    img.logo {
+    display: block;
+  }
+  </style>
+  
+</head>
+
+<body>
+<div data-role="page">
+  <div data-role="header">
+
+    <h1 id='titulo'></h1>
+    <p id='si-es'>Ejercicio git 1: Interfaz</p> 
+   
+    <div data-role="navbar">
+    <ul>
+<li><a href="#" data-icon="home">Inicio</a></li>
+<li><a href="#" data-icon="info">Info</a></li>
+<li><a href="#" data-icon="search">Buscar</a></li>
+
+    </ul>
+  </div>
+  </div>
+
+
+<div data-role="content">
+  <form method="post" id="miForm2">
+  <label for="campoTexto2"></label>
+  <input type="number" name="campoTexto" id="campoTexto" min="-10" max="100">
+  <img id="imagen" class="logo" src="https://campus.deustoformacion.com/Portals/DEUSTO/DFO%20Logotipo%20Color%20Pantalla%2072%20RGB.png?ver=K8Wh-9Kho69Tj4U9YcKhyA%3d%3d"> 
+  <input  type="submit" data-inline="true" value="Enviar">
+  </form>
+  </div>
+
+<script>
+  $("#miForm2").on("submit", function(evt) {
+    evt.preventDefault();
+    var campoTexto= $("#campoTexto").val();
+    var img = $('.logo').val();/*capturar clase css*/ 
+    if (!$('#campoTexto').val()) {
+        alert('completa los datos el campo esta vacio!');
+    } else {
+        $('.logo').height(campoTexto);
+    
+    }
+
+});
+</script>
+   
+  <script type="text/javascript" src="ejercicio_6.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+</body>
+</html>
