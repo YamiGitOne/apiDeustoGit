@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" >
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <title>APPIcalendar</title>
+    </head>
+    <body onload="onLoad()">
+        
+        <div class="app">
+
+            <h1>Crear cuenta</h1>
+            
+            <nav>
+                <a href="/index.html"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">INICIO</button></a>
+               <!--  <a href="/search.html" ><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-search">BUSCAR</button></a>
+                <a href="/camara.html" ><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-camera">CÁMARA</button></a> -->
+                
+                </nav>
+                
+                <!--test form-->
+                 <section class="contacts-list">
+                    <h1>Agrega un contacto</h1>
+                    <div data-role="content">
+                        
+                        <form id="formulario_persona" name = "myForm">
+                            <label for="first">Nombre</label>
+                            <input id="first" name="first">
+                            <label for="last">Apellidos</label>
+                            <input id="last" name="last">
+                            <label for="acctNum">Teléfono</label>
+                            <input id="acctNum" name="acctNum">
+                            <!-- <label for="email">Email</label>
+                            <input id="email" name="email"> -->
+                            <div id = "status" name = "status">Status Message</div> 
+                            <button type="submit" class="primary-button" id="guardar_contacto" onclick="addItem();" >Guardar contacto</button>
+                            <button type="submit" class="primary-button" id="delete" onclick="removeItem();" >Borrar</button>    
+                           <!-- <input type="button" value="Guardar" id="guardar" onclick="guardar();">  -->
+                            <!-- <input type="button" value="Guardar" id="guardar_contacto" onclick="guardar_contacto();">  -->
+                        </form>
+
+                        <!-- <div id="status" name="status">Status Message</div> para verificar estado de la conexion con BD-->
+                    </div>
+<!-- input type="test" placeholder="Agrega un contacto" id="input_producto">
+<button  class="primary-button" id="Agregar">Agregar</button>
+<div id="lista_de_productos"></div> -->
+
+                 </section>  
+
+                </div>
+               
+
+
+        
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+       <!-- <script type="text/javascript" src="js/index.js"></script>  -->
+        <script src="js/jquery-3.6.1.min.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+           
+        function onLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+           // Wait for device API libraries to load
+            //
+           
+        
+            // device APIs are available
+            //
+            function onDeviceReady() {
+
+                // conexi{on con bd}
+               var db = window.sqlitePlugin.openDatabase({ name: 'my.db', location: 'default' }, function (db) {
+               
+                
+   // Here, you might create or open the table.
+
+}, function (error) {
+   console.log('Open database ERROR: ' + JSON.stringify(error));
+});
+
+
+
+
+ } 
+
+ //crear tabla bd
+ db.transaction(function (tx) {
+   // ...
+
+   tx.executeSql('CREATE TABLE customerAccounts (firstname, lastname, acctNo)');
+  
+}, function (error) {
+   console.log('transaction error: ' + error.message);
+}, function () {
+   console.log('transaction ok');
+});  
+
+//funcion paar insertar datos en BD
+function addItem(first, last, acctNum) {
+    //capturo el id del form en una variable.valor
+    var first = $("#first").val();
+    var last = $("#last").val();
+    var acctNum = $("#acctNum").val();
+    var msg;
+db.transaction(function (tx) {
+    
+    var query = "INSERT INTO customerAccounts (firstname, lastname, acctNo) VALUES (?,?,?)";
+
+
+    tx.executeSql(query, [first, last, acctNum], function(tx, res) {
+        console.log("insertId: " + res.insertId + " -- probably 1");
+        console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+    },
+    function(tx, error) {
+        console.log('INSERT error: ' + error.message);
+    });
+}, function(error) {
+    console.log('transaction error: ' + error.message);
+}, function() {
+    console.log('transaction ok');
+    
+});
+
+}  
+
+//falta almacenar en una variable cada elemento de la funcion
+
+//prueba que no funciona ddItem("firstname");
+
+
+//addItem(first, last, acctNum);
+/* addItem("Joe", "Auzomme", 102);
+addItem("Pete", "Smith", 103);  */ 
+
+//leer datos de bd
+/* db.transaction(function (tx) { 
+            tx.executeSql('SELECT * FROM customerAccounts', [], function (tx, results) { 
+               var len = results.rows.length, i; 
+               msg = "<p>Found rows: " + len + "</p>"; 
+               document.querySelector('#status').innerHTML +=  msg; 
+      
+               for (i = 0; i < len; i++) { 
+                  msg = "<p><b>" + results.rows.item(i).log + "</b></p>"; 
+                  document.querySelector('#status').innerHTML +=  msg; 
+               } 
+            }, null); 
+         }); 
+ */
+//funcion borrar de db
+function removeItem(acctNum) {
+
+db.transaction(function (tx) {
+
+    var query = "DELETE * FROM customerAccounts WHERE acctNo = ?";
+
+    tx.executeSql(query, [acctNum], function (tx, res) {
+        console.log("removeId: " + res.insertId);
+        console.log("rowsAffected: " + res.rowsAffected);
+    },
+    function (tx, error) {
+        console.log('DELETE error: ' + error.message);
+    });
+}, function (error) {
+    console.log('transaction error: ' + error.message);
+}, function () {
+    console.log('transaction ok');
+    alert('Delete successfully');
+});
+}
+
+
+
+
+
+
+            </script>
+    </body>
+</html>

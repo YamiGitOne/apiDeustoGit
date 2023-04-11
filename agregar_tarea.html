@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" >
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <title>APPIcalendar</title>
+    </head>
+    <body onload="onLoad()">
+        
+        <div class="app">
+
+            <h1>Agregar tarea</h1>
+            
+            <nav>
+                <a href="/index.html"><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">INICIO</button></a>
+               <!--  <a href="/search.html" ><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-search">BUSCAR</button></a>
+                <a href="/camara.html" ><button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-camera">CÁMARA</button></a> -->
+                
+                </nav>
+                
+                <!--test form-->
+                 <section class="contacts-list">
+                    <h1>Agrega una tarea</h1>
+   
+                    <div data-role="content">
+                            <form id="tareaForm" name = "tareaForm">
+                            <label for="tarea">tarea</label>
+                            <input id="tarea" name="tarea">
+                            <label for="fecha">fecha</label>
+                            <input type="date" id="fecha" name="fecha">
+                            <label for="description">descripción</label>
+                            <input id="description" name="description">
+                            <label for="status">Estado</label>
+                            <input id="status" name="status">
+                            <label for="contactoInput">Contacto</label>
+                            <select id="contactoInput" name="contactoInput">
+                                <option value="" selected disabled>Selecciona un contacto</option>
+                                <!-- Opciones de contacto se llenarán dinámicamente desde la base de datos -->
+                            </select>
+
+                            <button type="submit" class="primary-button" id="guardar_tarea" onclick="addTask()" >Guardar tarea</button>
+                           <!--  <button type="submit" class="primary-button" id="get_task" onclick="getTask()" >listar tareas</button> -->
+                            <div id = "status" name = "status">Status Message</div> 
+                        </form> 
+
+<!--  <table>
+    <thead><th>Nombre</th> <th>tarea</th><th>status</th></thead>
+    <tbody id="tasks"></tbody>
+</table>  -->
+                        <!-- <div id="status" name="status">Status Message</div> para verificar estado de la conexion con BD-->
+                    </div>
+<!-- input type="test" placeholder="Agrega un contacto" id="input_producto">
+<button  class="primary-button" id="Agregar">Agregar</button>
+<div id="lista_de_productos"></div> -->
+
+                 </section>  
+
+                </div>
+               
+
+
+        
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>  
+        <script src="js/jquery-3.6.1.min.js"></script>
+
+        
+
+            </script>
+    </body>
+</html>
